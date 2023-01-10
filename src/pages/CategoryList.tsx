@@ -1,8 +1,11 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { customState } from "../atoms";
+import Category from "./Category";
 
 const List = styled.ul``;
 
-const Category = styled.li`
+export const Customs = styled.li`
   background-color: ${(props) => props.theme.accentColor};
   color: ${(props) => props.theme.bgColor};
   margin-bottom: 20px;
@@ -22,6 +25,17 @@ const Category = styled.li`
 `;
 
 function CategoryList() {
-  return <>카테고리 목록입니다</>;
+  const categorylist = useRecoilValue(customState);
+  return (
+    <>
+      <List>
+        {categorylist?.map((custom) => (
+          <Customs>
+            <Category key={custom.id} {...custom} />
+          </Customs>
+        ))}
+      </List>
+    </>
+  );
 }
 export default CategoryList;
