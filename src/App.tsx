@@ -4,6 +4,7 @@ import styled, {
   keyframes,
   ThemeProvider,
 } from "styled-components";
+import Router from "./routes/Router";
 import ToDoList from "./ToDoList";
 
 const GlobalStyle = createGlobalStyle`
@@ -80,7 +81,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <ToDoList />
+      <Router />
     </>
   );
 }
