@@ -3,6 +3,6 @@
 
 Start Here ▶️ https://hyemimi.github.io/to-do-list/
 
-<H3>⚒️React | TypeScript | Recoil⚒️</H3>
+<H3>⚒️React | TypeScript | Styled-components | Recoil⚒️</H3>
 
 
