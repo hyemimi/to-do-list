@@ -25,7 +25,7 @@ export const toDoState = atom<IToDo[]>({
   default: [],
 });
 export const customState = atom<Icustom[]>({
-  key: "toDo",
+  key: "custom",
   default: [],
 });
 export const toDoSelector = selector({
