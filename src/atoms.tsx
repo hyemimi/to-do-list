@@ -10,11 +10,13 @@ export interface IToDo {
   text: string;
   id: number;
   category: Categories;
+  cusId?: number;
 }
 
 export interface Icustom {
   title: string;
   id: number;
+  todos: IToDo[];
 }
 
 const { persistAtom } = recoilPersist({
@@ -41,6 +43,7 @@ export const toDoSelector = selector({
   get: ({ get }) => {
     const toDos = get(toDoState);
     const category = get(categoryState);
+
     return toDos.filter((toDo) => toDo.category === category);
   },
 });

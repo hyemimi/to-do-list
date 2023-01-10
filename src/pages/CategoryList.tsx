@@ -6,6 +6,9 @@ import Category from "./Category";
 const List = styled.ul``;
 
 export const Customs = styled.li`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
   background-color: ${(props) => props.theme.accentColor};
   color: ${(props) => props.theme.bgColor};
   margin-bottom: 20px;

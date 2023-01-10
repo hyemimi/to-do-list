@@ -1,13 +1,12 @@
 import { useRecoilValue } from "recoil";
-import { Icustom } from "../atoms";
-import ToDoList from "../ToDoList";
-import styled from "styled-components";
+import { Icustom, toDoState } from "../atoms";
+
 import { Link } from "react-router-dom";
 import { Customs } from "./CategoryList";
 function Category({ title, id }: Icustom) {
   return (
     <>
-      <Link to={`/custom/${id}`}>
+      <Link to={`/custom/${id}`} state={{ title: title }}>
         <div>{title}</div>
       </Link>
     </>

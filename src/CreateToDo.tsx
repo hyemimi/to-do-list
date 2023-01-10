@@ -1,19 +1,26 @@
 import { useForm } from "react-hook-form";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { categoryState, toDoState } from "./atoms";
+import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
+import { categoryState, customState, toDoState } from "./atoms";
+import { useParams } from "react-router-dom";
 interface FormData {
   toDo: string;
 }
 
 function CreateToDo() {
+  const { cusID } = useParams() as { cusID?: number };
+  const [customList, setCustomList] = useRecoilState(customState);
   const setToDos = useSetRecoilState(toDoState);
   const category = useRecoilValue(categoryState);
   const { register, handleSubmit, setValue } = useForm<FormData>();
 
   const handleValid = ({ toDo }: FormData) => {
-    console.log("add to do", toDo);
     setToDos((oldToDos) => [
-      { text: toDo, id: Date.now(), category: category },
+      {
+        text: toDo,
+        cusId: cusID,
+        category: category,
+        id: Date.now(),
+      },
       ...oldToDos,
     ]);
     setValue("toDo", "");

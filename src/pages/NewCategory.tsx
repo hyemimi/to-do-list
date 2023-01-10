@@ -11,7 +11,10 @@ function NewCategory() {
   const { register, handleSubmit, setValue } = useForm<FormData>();
 
   const handleValid = ({ title }: FormData) => {
-    setCustom((oldCustom) => [{ title: title, id: Date.now() }, ...oldCustom]);
+    setCustom((oldCustom) => [
+      { title: title, id: Date.now(), todos: [] },
+      ...oldCustom,
+    ]);
     setValue("title", "");
   };
   return (

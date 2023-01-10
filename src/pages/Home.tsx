@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link, Outlet, useMatch } from "react-router-dom";
 import NewCategory from "./NewCategory";
 import CategoryList from "./CategoryList";
+import { Helmet } from "react-helmet";
 
 export const Container = styled.div`
   display: flex;
@@ -24,14 +25,14 @@ export const Title = styled.h1`
   font-weight: 600;
   margin-bottom: 5px;
 `;
-const Tabs = styled.div`
+export const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin: 20px 0px;
-  gap: 30px;
+  gap: 0px;
 `;
 
-const Tab = styled.span`
+export const Tab = styled.span`
   text-align: center;
   text-transform: uppercase;
   font-size: 12px;
@@ -47,9 +48,12 @@ const Tab = styled.span`
 function Home() {
   return (
     <>
+      <Helmet>
+        <title>To-Do</title>
+      </Helmet>
       <Container>
         <Header>
-          <Title>💙My TO-DO-LIST💙</Title>
+          <Title>💙My To Do List💙</Title>
         </Header>
         <Tabs>
           <Tab>Make your Category</Tab>

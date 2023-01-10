@@ -1,15 +1,25 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { Categories, IToDo, toDoState } from "./atoms";
+import { Customs } from "./pages/CategoryList";
+import styled from "styled-components";
 
-function ToDo({ text, category, id }: IToDo) {
+const ToDoItem = styled.div`
+  display: flex;
+  margin: 10px;
+  padding: 5px;
+  align-items: center;
+`;
+function ToDo({ text, category, id, cusId }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
+  const { cusID } = useParams() as { cusID?: number };
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const name = event.currentTarget.name;
     setToDos((oldToDos) => {
-      const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
+      const targetIndex = oldToDos.findIndex((toDo) => toDo?.id === id);
       const oldToDo = oldToDos[targetIndex];
-      const newToDo = { text, id, category: name as any };
+      const newToDo = { text, id, cusId, category: name as any };
       console.log(oldToDo, newToDo);
 
       return [
@@ -30,28 +40,55 @@ function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+  const ToDo = styled.li`
+    background-color: ${(props) => props.theme.accentColor};
+    color: ${(props) => props.theme.bgColor};
+
+    margin-bottom: 3px;
+    padding: 10px;
+    border-radius: 5px;
+    a {
+      padding: 20px;
+      display: flex;
+      transition: color 0.2s ease-in;
+      align-items: baseline;
+    }
+  `;
+  const Button = styled.button`
+    margin: 5px;
+    border-color: ${(props) => props.theme.accentColor};
+    border-radius: 10px;
+    background-color: ${(props) => props.theme.accentColor};
+    &: hover {
+      color: ${(props) => props.theme.hoverColor};
+    }
+  `;
   return (
     <>
-      <li>
-        <span>{text}</span>
+      <ul>
+        <ToDoItem>
+          <ToDo>
+            <span>{text}</span>
 
-        {category !== Categories.DOING && (
-          <button name={Categories.DOING} onClick={onClick}>
-            Doing
-          </button>
-        )}
-        {category !== Categories.TO_DO && (
-          <button name={Categories.TO_DO} onClick={onClick}>
-            To Do
-          </button>
-        )}
-        {category !== Categories.DONE && (
-          <button name={Categories.DONE} onClick={onClick}>
-            Done
-          </button>
-        )}
-        <button onClick={onDeleteHandler}>Delete</button>
-      </li>
+            {category !== Categories.DOING && (
+              <Button name={Categories.DOING} onClick={onClick}>
+                Doing
+              </Button>
+            )}
+            {category !== Categories.TO_DO && (
+              <Button name={Categories.TO_DO} onClick={onClick}>
+                To Do
+              </Button>
+            )}
+            {category !== Categories.DONE && (
+              <Button name={Categories.DONE} onClick={onClick}>
+                Done
+              </Button>
+            )}
+            <Button onClick={onDeleteHandler}>Delete</Button>
+          </ToDo>
+        </ToDoItem>
+      </ul>
     </>
   );
 }
